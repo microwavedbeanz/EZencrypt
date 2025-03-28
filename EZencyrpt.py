@@ -1,8 +1,17 @@
 import time
 import random
+import hashlib
 primes = [2,3,5,7,11,13,17,23]
 
 alan_detector = random.choice(primes)
+
+def sha512(plaintext):
+    raw_hash = hashlib.sha512(plaintext.encode())
+    final_hash = raw_hash.hexdigest()
+    return final_hash
+
+xyz = "josh"
+print(xyz+":"+sha512(xyz))
 
 
 def decrypt():
@@ -32,6 +41,16 @@ def encrypt():
     print(out)
     time.sleep(5)
     menu()
+    
+def hash():
+    out = ""
+    plain = input("Enter Text to be hashed:")
+    out = sha512(plain)
+    print(out)
+    time.sleep(5)
+    menu()
+
+
 def menu():
     print("""
 
@@ -39,18 +58,22 @@ MENU
 ----
 [1] Encrypt
 [2] Decrypt
-[3] Exit
+[3] Hash
+[4] Exit
 
 """)
     choice = int(input("Choice:"))
     if choice == 1:
-     encrypt()
+        encrypt()
     if choice == 2:
-     decrypt()
+        decrypt()
     if choice == 3:
-     exit()
+        hash()
+    if choice == 4:
+        exit()
     else:
-     print("It was so simple...")
-     exit()
+        print("It was so simple...")
+        exit()
     
 menu()
+
